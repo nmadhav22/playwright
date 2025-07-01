@@ -1,4 +1,10 @@
 # Ignore Play! working directory #
+node_modules/
+test-results/
+allure-results/
+allure-report/
+Downloads/
+html-report.zip/
 bin/
 /db
 .eclipse
