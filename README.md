@@ -63,8 +63,6 @@ Bonus:
 - Configured GitHub Actions to get triggered on pull/push actions
 - Slack Notifications with html-report url once Github Actions is completed.
 
-### Youtube Video Tutorial
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/mKdBAXNsY1Y/0.jpg)](https://www.youtube.com/watch?v=mKdBAXNsY1Y)
 
 ### Built With
 
