@@ -81,6 +81,6 @@ steps:
           "title": "Playwright Allure Report",
           "text": "✅ Test execution completed. [View Allure Report](https://$(AZURE_STORAGE_ACCOUNT_NAME).blob.core.windows.net/$(CONTAINER_NAME)/$(REPORT_FOLDER)/index.html)"
         }' \
-        $(TEAMS_WEBHOOK_URL)
-      displayName: 'Send Allure Report Link to Teams'
-      condition: always()
+      $(TEAMS_WEBHOOK_URL)
+    displayName: 'Send Allure Report Link to Teams'
+    condition: always()
