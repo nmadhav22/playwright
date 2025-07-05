@@ -11,6 +11,8 @@ variables:
   value: 'playwrighttestresultsnm'
 - name: CONTAINER_NAME
   value: 'allure-reports'
+- name: REPORT_FOLDER
+  value: 'allure-report-$(Build.BuildId)'  # Unique folder for every run
 
 steps:
   - task: NodeTool@0
@@ -29,13 +31,13 @@ steps:
     env:
       npm_config_ENV: qa
 
-  - script: npx allure generate allure-results --clean -o allure-report
+  - script: npx allure generate allure-results --clean -o $(REPORT_FOLDER)
     displayName: 'Generate Allure Report'
     condition: always()
 
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: 'allure-report'
+      targetPath: '$(REPORT_FOLDER)'
       artifact: 'allure-report'
     displayName: 'Publish Allure Report Artifact'
     condition: always()
@@ -51,7 +53,10 @@ steps:
         az storage blob upload-batch \
           --account-name $(AZURE_STORAGE_ACCOUNT_NAME) \
           --account-key $(AZURE_STORAGE_ACCOUNT_KEY) \
-          --destination $(CONTAINER_NAME) \
-          --source allure-report
-          --overwrite true
+          --destination $(CONTAINER_NAME)/$(REPORT_FOLDER) \
+          --source $(REPORT_FOLDER)
+
+        echo "✅ Allure Report uploaded!"
+        echo "🔗 Report URL:"
+        echo "https://$(AZURE_STORAGE_ACCOUNT_NAME).blob.core.windows.net/$(CONTAINER_NAME)/$(REPORT_FOLDER)/index.html"
     condition: always()
