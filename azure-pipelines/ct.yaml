@@ -1,0 +1,21 @@
+# azure-pipelines.yml
+trigger:
+  - main  # Or your branch name
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm ci
+      npx playwright install --with-deps
+    displayName: 'Install dependencies and browsers'
+
+  - script: |
+      npx playwright test tests/functional/BurnsMcDonnellHeaderFooter.test.ts
+    displayName: 'Run specific Playwright test'
