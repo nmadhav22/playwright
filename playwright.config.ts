@@ -21,13 +21,19 @@ const config: PlaywrightTestConfig = {
         browserName: `chromium`,
         channel: `chrome`,
         baseURL: testConfig[ENV],
-        headless: process.env.CI ? true : false,
+        headless: true,
         viewport: { width: 1280, height: 638 },
         ignoreHTTPSErrors: true,
+
+        //Enable File Downloads in Chrome
         acceptDownloads: true,
+
+        //Artifacts
         screenshot: `only-on-failure`,
         video: `retain-on-failure`,
         trace: `retain-on-failure`,
+
+        //Slows down execution by ms
         launchOptions: {
           slowMo: 0
         }
