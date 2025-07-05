@@ -38,6 +38,11 @@ steps:
     displayName: 'Publish JUnit results to Azure Pipelines'
 
   - script: |
+      echo "===== Showing results.xml ====="
+      cat results.xml
+    displayName: 'Show contents of results.xml'
+
+  - script: |
       curl -H "Content-Type: multipart/form-data" \
            -u $(JIRA_USER):$(JIRA_API_TOKEN) \
            -F "file=@results.xml" \
