@@ -5,6 +5,11 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  # Replace with your storage account name and container name
+  AZURE_STORAGE_ACCOUNT_NAME: 'playwrighttestresultsnm'
+  CONTAINER_NAME: 'allure-reports'
+
 steps:
   - task: NodeTool@0
     inputs:
@@ -30,3 +35,19 @@ steps:
       artifact: 'allure-report'
     condition: always()
     displayName: 'Publish Allure Report Artifact'
+
+
+  - task: AzureCLI@2
+    displayName: 'Upload Allure Report to Blob Storage'
+    inputs:
+      azureSubscription: 'playwright-storage-connection'
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        echo "Uploading Allure Report to Blob..."
+        az storage blob upload-batch \
+          --account-name $(AZURE_STORAGE_ACCOUNT_NAME) \
+          --account-key $(AZURE_STORAGE_ACCOUNT_KEY) \
+          -d $(CONTAINER_NAME) \
+          -s allure-report
+    condition: always()
