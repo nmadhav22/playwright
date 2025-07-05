@@ -53,4 +53,5 @@ steps:
           --account-key $(AZURE_STORAGE_ACCOUNT_KEY) \
           --destination $(CONTAINER_NAME) \
           --source allure-report
+          --overwrite true
     condition: always()
