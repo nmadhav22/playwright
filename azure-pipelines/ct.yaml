@@ -41,7 +41,7 @@ steps:
       curl -H "Content-Type: multipart/form-data" \
            -u $(JIRA_USER):$(JIRA_API_TOKEN) \
            -F "file=@results.xml" \
-           "https://slamptech.atlassian.net/rest/raven/2.0/import/execution/junit?projectKey=XSP"
+           "https://slamptech.atlassian.net/rest/raven/2.0/import/execution/junit?projectKey=SCRUM"
     displayName: Upload to Zephyr
 
   - script: npx allure generate allure-results --clean -o $(REPORT_FOLDER)
