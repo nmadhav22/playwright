@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
   globalSetup: `./global-setup`,
   timeout: 120000,
   retries: 0,
-  reporter: [[`./CustomReporterConfig.ts`], [`allure-playwright`], [`html`, { outputFolder: 'html-report', open: 'never' }]],
+  reporter: [[`./CustomReporterConfig.ts`], [`allure-playwright`], ['junit', { outputFile: 'results.xml' }]],
   projects: [
     {
       name: `Chrome`,

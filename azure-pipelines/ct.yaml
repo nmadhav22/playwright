@@ -31,6 +31,19 @@ steps:
     env:
       npm_config_ENV: qa
 
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/results.xml'
+    displayName: 'Publish JUnit results to Azure Pipelines'
+
+  - script: |
+      curl -H "Content-Type: multipart/form-data" \
+        -u $(JIRA_USER):$(JIRA_API_TOKEN) \
+        -F "file=@results.xml" \
+        "https://your-domain.atlassian.net/rest/raven/2.0/import/execution/junit?projectKey=DEMO"
+    displayName: 'Upload test results to Xray'
+
   - script: npx allure generate allure-results --clean -o $(REPORT_FOLDER)
     displayName: 'Generate Allure Report'
     condition: always()
