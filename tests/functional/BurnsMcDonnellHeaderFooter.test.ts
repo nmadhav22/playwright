@@ -8,7 +8,7 @@ test('Validate Burns & McDonnell header and footer', async ({ page }) => {
 
   // HEADER VALIDATION
   // Check for logo
-  const logo = page.getByRole('link', { name: 'Burns & McDonnell Logo whites' });
+  const logo = page.getByRole('link', { name: 'Burns & McDonnell Logo white' });
   await expect(logo).toBeVisible();
 
   // Check for main navigation links in header
