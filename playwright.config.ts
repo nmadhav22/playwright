@@ -1,6 +1,5 @@
 import { PlaywrightTestConfig, devices } from '@playwright/test';
 import { testConfig } from './testConfig';
-import { OrtoniReportConfig } from 'ortoni-report';
 
 const ENV = process.env.npm_config_ENV;
 
@@ -9,60 +8,26 @@ if (!ENV || ![`qa`, `dev`, `qaApi`, `devApi`].includes(ENV)) {
   process.exit();
 }
 
-const reportConfig: OrtoniReportConfig = {
-  base64Image: true,
-  title: "Playwright Framework with Typescript",
-  showProject: true,
-  filename: "OrtoniHtmlReport",
-  authorName: "Akshay Pai",
-  preferredTheme: "dark",
-  folderPath: "html-report",
-  projectName: "Playwright Framework with Typescript",
-}
-
 const config: PlaywrightTestConfig = {
 
-  //Global Setup to run before all tests
   globalSetup: `./global-setup`,
-
-  //sets timeout for each test case
   timeout: 120000,
-
-  //number of retries if test case fails
   retries: 0,
-
-  //Reporters
-  reporter: [[`./CustomReporterConfig.ts`], [`allure-playwright`], [`html`, { outputFolder: 'html-report', open: 'never' }],['ortoni-report', reportConfig]],
-
+  reporter: [[`./CustomReporterConfig.ts`], [`allure-playwright`], [`html`, { outputFolder: 'html-report', open: 'never' }]],
   projects: [
     {
       name: `Chrome`,
       use: {
-        // Configure the browser to use.
         browserName: `chromium`,
-
-        //Chrome Browser Config
         channel: `chrome`,
-
-        //Picks Base Url based on User input
         baseURL: testConfig[ENV],
-
-        //Browser Mode
-        headless: false,
-
-        //Browser height and width
+        headless: process.env.CI ? true : false,
         viewport: { width: 1280, height: 638 },
         ignoreHTTPSErrors: true,
-
-        //Enable File Downloads in Chrome
         acceptDownloads: true,
-
-        //Artifacts
         screenshot: `only-on-failure`,
         video: `retain-on-failure`,
         trace: `retain-on-failure`,
-
-        //Slows down execution by ms
         launchOptions: {
           slowMo: 0
         }
