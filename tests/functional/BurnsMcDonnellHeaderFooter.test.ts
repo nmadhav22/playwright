@@ -3,7 +3,7 @@ import { expect } from '@playwright/test';
 
 // Functional UI test for Burns & McDonnell website header and footer
 
-test('Validate Burns & McDonnell header and footer [SCRUM-T1]', async ({ page }) => {
+test('SCRUM-T1', async ({ page }) => {
   await page.goto('https://www.burnsmcd.com/');
 
   // HEADER VALIDATION
