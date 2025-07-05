@@ -19,7 +19,6 @@ const config: PlaywrightTestConfig = {
       name: `Chrome`,
       use: {
         browserName: `chromium`,
-        channel: `chrome`,
         baseURL: testConfig[ENV],
         headless: true,
         viewport: { width: 1280, height: 638 },
