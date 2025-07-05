@@ -19,3 +19,13 @@ steps:
   - script: |
       npx playwright test tests/functional/BurnsMcDonnellHeaderFooter.test.ts
     displayName: 'Run specific Playwright test'
+
+  - script: |
+      npx allure generate ./allure-results --clean -o ./allure-report
+      displayName: 'Generate Allure HTML Report'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(System.DefaultWorkingDirectory)/allure-report'
+      artifactName: 'AllureReport'
+    displayName: 'Publish Allure HTML Report'
