@@ -3,9 +3,6 @@ name: Playwright Github Actions
 
 # Define when to trigger this workflow
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main

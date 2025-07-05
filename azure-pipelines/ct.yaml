@@ -6,9 +6,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  # Replace with your storage account name and container name
-  AZURE_STORAGE_ACCOUNT_NAME: 'playwrighttestresultsnm'
-  CONTAINER_NAME: 'allure-reports'
+- group: StorageSecrets
+- name: AZURE_STORAGE_ACCOUNT_NAME
+  value: 'playwrighttestresultsnm'
+- name: CONTAINER_NAME
+  value: 'allure-reports'
 
 steps:
   - task: NodeTool@0
@@ -33,9 +35,8 @@ steps:
     inputs:
       targetPath: 'allure-report'
       artifact: 'allure-report'
-    condition: always()
     displayName: 'Publish Allure Report Artifact'
-
+    condition: always()
 
   - task: AzureCLI@2
     displayName: 'Upload Allure Report to Blob Storage'
@@ -48,6 +49,6 @@ steps:
         az storage blob upload-batch \
           --account-name $(AZURE_STORAGE_ACCOUNT_NAME) \
           --account-key $(AZURE_STORAGE_ACCOUNT_KEY) \
-          -d $(CONTAINER_NAME) \
-          -s allure-report
+          --destination $(CONTAINER_NAME) \
+          --source allure-report
     condition: always()
