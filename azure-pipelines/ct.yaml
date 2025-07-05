@@ -26,6 +26,8 @@ steps:
   - script: |
       npx playwright test tests/functional/BurnsMcDonnellHeaderFooter.test.ts
     displayName: 'Run specific Playwright test'
+    env:
+      npm_config_ENV: qa
 
   - script: npx allure generate allure-results --clean -o allure-report
     displayName: 'Generate Allure Report'
