@@ -76,6 +76,10 @@ const config: PlaywrightTestConfig = {
           baseURL: 'https://reqres.in',
         },
       },
+      {
+        name: 'db',
+        testDir: './tests/db',
+      },
     ],
 };
 export default config;

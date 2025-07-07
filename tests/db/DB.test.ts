@@ -1,10 +1,16 @@
-import { testConfig } from '../../testConfig';
 import { DBActions } from '@lib/DBActions';
-import { test } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 
-test('Connect to Postgres DB', async () => {
-    const dbConnection = new DBActions();
-    await dbConnection.connectDB(testConfig.dbUsername, testConfig.dbPassword, testConfig.dbServerName,
-        testConfig.dbPort, testConfig.dbName);
-    await dbConnection.query(`SELECT * FROM TABLE`);
+test('SQLite DB demo', async () => {
+    const db = new DBActions();
+
+    await db.createTable();
+    await db.insertRow(1, 'Playwright');
+
+    const row = await db.queryRow();
+
+    expect(row.id).toBe(1);
+    expect(row.name).toBe('Playwright');
+
+    await db.close();
 });
