@@ -4,7 +4,7 @@ import { APIResponse, expect } from '@playwright/test';
 export class APIActions {
 
   async verifyStatusCode(response: APIResponse): Promise<void> {
-    await expect(response, `200 Status code was not displayed.`).toBeOK();
+    await expect(response).toBeOK();
   }
 
   async verifyResponseBody(expectedResponseBodyParams: string, responsePart: JSON, responseType: string): Promise<void> {
@@ -19,7 +19,7 @@ export class APIActions {
         break;
       }
     }
-    expect(status, `${fieldNames} was not present in ${responseType}`).toBe(true);
+    expect(status).toBe(true);
   }
 
   async verifyResponseHeader(expectedResponseHeaderParams: string, responsePart: Array<{ name: string, value: string }>, responseType: string): Promise<void> {
