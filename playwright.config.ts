@@ -18,6 +18,7 @@ const config: PlaywrightTestConfig = {
     projects: [
       {
         name: `Chrome`,
+        testDir: './tests/functional/Burns',
         use: {
           browserName: `chromium`,
           baseURL: testConfig[ENV],
@@ -35,6 +36,7 @@ const config: PlaywrightTestConfig = {
       },
       {
         name: `Firefox`,
+        testDir: './tests/functional/Burns',
         use: {
           browserName: `firefox`,
           baseURL: testConfig[ENV],
@@ -50,20 +52,28 @@ const config: PlaywrightTestConfig = {
           },
         },
       },
+      // {
+      //   name: `Pixel 4a`,
+      //   testDir: './tests/functional/Burns',
+      //   use: {
+      //     ...devices['Pixel 4a (5G)'],
+      //     baseURL: testConfig[ENV],
+      //     headless: true,
+      //     ignoreHTTPSErrors: true,
+      //     acceptDownloads: true,
+      //     screenshot: 'only-on-failure',
+      //     video: 'retain-on-failure',
+      //     trace: 'retain-on-failure',
+      //     launchOptions: {
+      //       slowMo: 0,
+      //     },
+      //   },
+      // },
       {
-        name: `Pixel 4a`,
+        name: 'api',
+        testDir: './tests/api',
         use: {
-          ...devices['Pixel 4a (5G)'],
-          baseURL: testConfig[ENV],
-          headless: true,
-          ignoreHTTPSErrors: true,
-          acceptDownloads: true,
-          screenshot: 'only-on-failure',
-          video: 'retain-on-failure',
-          trace: 'retain-on-failure',
-          launchOptions: {
-            slowMo: 0,
-          },
+          baseURL: 'https://reqres.in',
         },
       },
     ],
