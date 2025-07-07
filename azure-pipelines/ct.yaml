@@ -26,8 +26,8 @@ steps:
     displayName: 'Install dependencies and browsers'
 
   - script: |
-      npx playwright test tests/functional/BurnsMcDonnellHeaderFooter.test.ts
-    displayName: 'Run specific Playwright test'
+      npx playwright test tests/functional/Burns/
+    displayName: 'Run Playwright test'
     env:
       npm_config_ENV: qa
 

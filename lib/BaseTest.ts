@@ -3,6 +3,8 @@ import { LoginPage } from '@pages/LoginPage';
 import { ElementsPage } from '@pages/ElementsPage';
 import { AlertsFrameWindowsPage } from '@pages/AlertsFrameWindowsPage';
 import { WidgetsPage } from '@pages/WidgetsPage';
+import { HomePage } from '@pages/HomePage';
+import { LocationsPage } from '@pages/Locations';
 import { InteractionsPage } from '@pages/InteractionsPage';
 import { WebActions } from '@lib/WebActions';
 import AxeBuilder from '@axe-core/playwright';
@@ -10,18 +12,26 @@ import AxeBuilder from '@axe-core/playwright';
 const test = baseTest.extend<{
   webActions: WebActions;
   loginPage: LoginPage;
+  locationPage: LocationsPage;
   elementsPage: ElementsPage;
   alertsFrameWindowsPage: AlertsFrameWindowsPage;
   widgetsPage: WidgetsPage;
   interactionsPage: InteractionsPage;
   makeAxeBuilder: AxeBuilder;
+  homePage: HomePage,
   testInfo: TestInfo;
 }>({
   webActions: async ({ page, context }, use) => {
     await use(new WebActions(page, context));
   },
+  homePage: async ({ page, context }, use) => {
+    await use(new HomePage(page, context));
+  },
   loginPage: async ({ page, context }, use) => {
     await use(new LoginPage(page, context));
+  },
+  locationPage: async ({ page, context }, use) => {
+    await use(new LocationsPage(page, context));
   },
   elementsPage: async ({ page, context }, use) => {
     await use(new ElementsPage(page, context));
