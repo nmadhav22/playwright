@@ -1,12 +1,8 @@
-# azure-pipelines.yml
 trigger:
-  - main  # Or your branch name
+  - main
 
 pool:
   vmImage: 'ubuntu-latest'
-
-container:
-  image: nikhilm22/my-playwright-java:latest
 
 variables:
   - group: StorageSecrets
@@ -15,75 +11,91 @@ variables:
   - name: CONTAINER_NAME
     value: 'allure-reports'
   - name: REPORT_FOLDER
-    value: 'allure-report-$(Build.BuildId)'  # Unique folder for every run
+    value: 'allure-report-$(Build.BuildId)'
 
-steps:
-  - script: |
-      npm ci
-    displayName: 'Install project dependencies'
+jobs:
+  # -------------------------------
+  # Job 1: Run tests inside your container
+  # -------------------------------
+  - job: PlaywrightTests
+    displayName: 'Run Playwright Tests in Container'
+    container: nikhilm22/my-playwright-java:latest
+    steps:
+      - script: |
+          npm ci
+        displayName: 'Install project dependencies'
 
-  - script: |
-      npx playwright test
-    displayName: 'Run Playwright tests'
-    env:
-      npm_config_ENV: qa
+      - script: |
+          npx playwright test
+        displayName: 'Run Playwright tests'
+        env:
+          npm_config_ENV: qa
 
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: '**/results.xml'
-    displayName: 'Publish JUnit results to Azure Pipelines'
-    condition: always()
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/results.xml'
+        displayName: 'Publish JUnit results to Azure Pipelines'
+        condition: always()
 
-  - script: |
-      curl -X POST \
-        -H "Authorization: Bearer $(ZEPHYR_TOKEN)" \
-        -H "Content-Type: multipart/form-data" \
-        -F "file=@results.xml" \
-        "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
-    displayName: 'Upload to Zephyr'
-    condition: always()
+      - script: |
+          curl -X POST \
+            -H "Authorization: Bearer $(ZEPHYR_TOKEN)" \
+            -H "Content-Type: multipart/form-data" \
+            -F "file=@results.xml" \
+            "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
+        displayName: 'Upload to Zephyr'
+        condition: always()
 
-  - script: |
-      npx allure generate allure-results --clean -o $(REPORT_FOLDER)
-    displayName: 'Generate Allure Report'
-    condition: always()
+      - script: |
+          npx allure generate allure-results --clean -o $(REPORT_FOLDER)
+        displayName: 'Generate Allure Report'
+        condition: always()
 
-  - task: PublishPipelineArtifact@1
-    inputs:
-      targetPath: '$(REPORT_FOLDER)'
-      artifact: 'allure-report'
-    displayName: 'Publish Allure Report Artifact'
-    condition: always()
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(REPORT_FOLDER)'
+          artifact: 'allure-report'
+        displayName: 'Publish Allure Report Artifact'
+        condition: always()
 
-  - task: AzureCLI@2
-    displayName: 'Upload Allure Report to Blob Storage'
-    target:
-      container: none
-    inputs:
-      azureSubscription: 'playwright-storage-connection'
-      scriptType: bash
-      scriptLocation: inlineScript
-      inlineScript: |
-        echo "Uploading Allure Report to Blob..."
-        az storage blob upload-batch \
-          --account-name $(AZURE_STORAGE_ACCOUNT_NAME) \
-          --account-key $(AZURE_STORAGE_ACCOUNT_KEY) \
-          --destination $(CONTAINER_NAME)/$(REPORT_FOLDER) \
-          --source $(REPORT_FOLDER)
+  # -------------------------------
+  # Job 2: Upload Allure Report to Azure Blob + Teams
+  # Runs on default VM, no container
+  # -------------------------------
+  - job: UploadAndNotify
+    displayName: 'Upload Report & Notify'
+    dependsOn: PlaywrightTests
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - download: current
+        artifact: 'allure-report'
 
-        echo "✅ Allure Report uploaded!"
-        echo "🔗 Report URL:"
-        echo "https://$(AZURE_STORAGE_ACCOUNT_NAME).blob.core.windows.net/$(CONTAINER_NAME)/$(REPORT_FOLDER)/index.html"
-    condition: always()
+      - task: AzureCLI@2
+        displayName: 'Upload Allure Report to Blob Storage'
+        inputs:
+          azureSubscription: 'playwright-storage-connection'
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            echo "Uploading Allure Report to Blob..."
+            az storage blob upload-batch \
+              --account-name $(AZURE_STORAGE_ACCOUNT_NAME) \
+              --account-key $(AZURE_STORAGE_ACCOUNT_KEY) \
+              --destination $(CONTAINER_NAME)/$(REPORT_FOLDER) \
+              --source $(REPORT_FOLDER)
+            
+            echo "✅ Allure Report uploaded!"
+            echo "🔗 Report URL:"
+            echo "https://$(AZURE_STORAGE_ACCOUNT_NAME).blob.core.windows.net/$(CONTAINER_NAME)/$(REPORT_FOLDER)/index.html"
 
-  - script: |
-      echo "Sending Teams notification..."
-      curl -H 'Content-Type: application/json' \
-        -d '{
-          "title": "Playwright Allure Report",
-          "text": "✅ Test execution completed. [View Allure Report](https://$(AZURE_STORAGE_ACCOUNT_NAME).blob.core.windows.net/$(CONTAINER_NAME)/$(REPORT_FOLDER)/index.html)"
-        }' \
-      $(TEAMS_WEBHOOK_URL)
-    displayName: 'Send Allure Report Link to Teams'
-    condition: always()
+      - script: |
+          echo "Sending Teams notification..."
+          curl -H 'Content-Type: application/json' \
+            -d '{
+              "title": "Playwright Allure Report",
+              "text": "✅ Test execution completed. [View Allure Report](https://$(AZURE_STORAGE_ACCOUNT_NAME).blob.core.windows.net/$(CONTAINER_NAME)/$(REPORT_FOLDER)/index.html)"
+            }' \
+          $(TEAMS_WEBHOOK_URL)
+        displayName: 'Send Allure Report Link to Teams'
