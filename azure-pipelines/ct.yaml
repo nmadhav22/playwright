@@ -1,32 +1,33 @@
 # azure-pipelines.yml
-
 trigger:
-  - main
+  - main  # Or your branch name
 
 pool:
   vmImage: 'ubuntu-latest'
 
-container:
-  image: mcr.microsoft.com/playwright:v1.53.2-jammy
-  options: '--user root'
-
 variables:
-- group: StorageSecrets
-- name: AZURE_STORAGE_ACCOUNT_NAME
-  value: 'playwrighttestresultsnm'
-- name: CONTAINER_NAME
-  value: 'allure-reports'
-- name: REPORT_FOLDER
-  value: 'allure-report-$(Build.BuildId)'  # Unique folder for every run
+  - group: StorageSecrets
+  - name: AZURE_STORAGE_ACCOUNT_NAME
+    value: 'playwrighttestresultsnm'
+  - name: CONTAINER_NAME
+    value: 'allure-reports'
+  - name: REPORT_FOLDER
+    value: 'allure-report-$(Build.BuildId)'  # Unique folder for every run
 
 steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
   - script: |
       npm ci
-    displayName: 'Install project dependencies'
+      npx playwright install --with-deps
+    displayName: 'Install dependencies and browsers'
 
   - script: |
       npx playwright test
-    displayName: 'Run Playwright tests'
+    displayName: 'Run Playwright test'
     env:
       npm_config_ENV: qa
 
@@ -43,19 +44,10 @@ steps:
         -H "Content-Type: multipart/form-data" \
         -F "file=@results.xml" \
         "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
-    displayName: 'Upload to Zephyr'
+    displayName: Upload to Zephyr
     condition: always()
 
-  - script: |
-      whoami
-      id
-      mkdir -p /var/lib/apt/lists/partial
-      apt-get update
-      apt-get install -y openjdk-17-jdk
-    displayName: 'Install Java for Allure'
-
-  - script: |
-      npx allure generate allure-results --clean -o $(REPORT_FOLDER)
+  - script: npx allure generate allure-results --clean -o $(REPORT_FOLDER)
     displayName: 'Generate Allure Report'
     condition: always()
 
