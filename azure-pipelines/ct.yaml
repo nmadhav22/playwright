@@ -84,7 +84,7 @@ jobs:
               --account-name $(AZURE_STORAGE_ACCOUNT_NAME) \
               --account-key $(AZURE_STORAGE_ACCOUNT_KEY) \
               --destination $(CONTAINER_NAME)/$(REPORT_FOLDER) \
-              --source $(REPORT_FOLDER)
+              --source $(Pipeline.Workspace)/allure-report
             
             echo "✅ Allure Report uploaded!"
             echo "🔗 Report URL:"
