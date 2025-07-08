@@ -6,7 +6,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 container:
-  image: nikhilm22/my-playwright-java
+  image: nikhilm22/my-playwright-java:latest
 
 variables:
   - group: StorageSecrets
