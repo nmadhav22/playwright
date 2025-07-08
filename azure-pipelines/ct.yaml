@@ -47,8 +47,8 @@ steps:
     condition: always()
 
   - script: |
-      apt-get update
-      apt-get install -y openjdk-17-jdk
+      sudo apt-get update
+      sudo apt-get install -y openjdk-17-jdk
     displayName: 'Install Java for Allure'
 
   - script: |
