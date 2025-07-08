@@ -8,6 +8,7 @@ pool:
 
 container:
   image: mcr.microsoft.com/playwright:v1.53.2-jammy
+  options: '--user root'
 
 variables:
 - group: StorageSecrets
