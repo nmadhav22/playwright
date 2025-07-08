@@ -47,8 +47,11 @@ steps:
     condition: always()
 
   - script: |
-      sudo apt-get update
-      sudo apt-get install -y openjdk-17-jdk
+      whoami
+      id
+      mkdir -p /var/lib/apt/lists/partial
+      apt-get update
+      apt-get install -y openjdk-17-jdk
     displayName: 'Install Java for Allure'
 
   - script: |
