@@ -58,6 +58,8 @@ steps:
 
   - task: AzureCLI@2
     displayName: 'Upload Allure Report to Blob Storage'
+    target:
+      container: none
     inputs:
       azureSubscription: 'playwright-storage-connection'
       scriptType: bash
