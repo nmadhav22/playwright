@@ -4,7 +4,6 @@ export class DBActions {
   private db: sqlite3.Database;
 
   constructor() {
-    // In-memory DB for demo
     this.db = new sqlite3.Database(':memory:');
   }
 

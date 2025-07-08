@@ -38,15 +38,11 @@ steps:
     displayName: 'Publish JUnit results to Azure Pipelines'
 
   - script: |
-      echo "===== Showing results.xml ====="
-      cat results.xml
-    displayName: 'Show contents of results.xml'
-
-  - script: |
-      curl -H "Content-Type: multipart/form-data" \
-           -u $(JIRA_USER):$(JIRA_API_TOKEN) \
-           -F "file=@results.xml" \
-           "https://slamptech.atlassian.net/rest/atm/1.0/automation/execution"
+      curl -X POST \
+        -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250ZXh0Ijp7ImJhc2VVcmwiOiJodHRwczovL3NsYW1wdGVjaC5hdGxhc3NpYW4ubmV0IiwidXNlciI6eyJhY2NvdW50SWQiOiI3MTIwMjA6NTIyNjg2NzgtMDhjMC00NDhjLTg4NTUtMmQzNTU5ODg5OWQxIiwidG9rZW5JZCI6ImRiMjAwODU3LTAxMDQtNGY1Yi04NTliLTE3Yjg0NWM1NDViOCJ9fSwiaXNzIjoiY29tLmthbm9haC50ZXN0LW1hbmFnZXIiLCJzdWIiOiI2M2E4NTEwOC1jMmI5LTNlZDAtYjc2NS1iMTIzMjVkOTQ4ZmUiLCJleHAiOjE3ODM0NjkyNDQsImlhdCI6MTc1MTkzMzI0NH0.sxFSV2ffesJ_-vTOTEItTZkI7c0WtBSHD_tiqJrkHwo" \
+        -H "Content-Type: multipart/form-data" \
+        -F "file=@results.xml" \
+        "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
     displayName: Upload to Zephyr
 
   - script: npx allure generate allure-results --clean -o $(REPORT_FOLDER)
