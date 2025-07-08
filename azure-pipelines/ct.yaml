@@ -36,6 +36,7 @@ steps:
       testResultsFormat: 'JUnit'
       testResultsFiles: '**/results.xml'
     displayName: 'Publish JUnit results to Azure Pipelines'
+    condition: always()
 
   - script: |
       curl -X POST \
@@ -44,6 +45,7 @@ steps:
         -F "file=@results.xml" \
         "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
     displayName: Upload to Zephyr
+    condition: always()
 
   - script: npx allure generate allure-results --clean -o $(REPORT_FOLDER)
     displayName: 'Generate Allure Report'
