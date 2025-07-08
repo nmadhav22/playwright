@@ -5,6 +5,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+container:
+  image: mcr.microsoft.com/playwright:v1.44.0-jammy
+
 variables:
 - group: StorageSecrets
 - name: AZURE_STORAGE_ACCOUNT_NAME
