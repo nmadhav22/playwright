@@ -46,6 +46,11 @@ steps:
     condition: always()
 
   - script: |
+      apt-get update
+      apt-get install -y openjdk-17-jdk
+    displayName: 'Install Java for Allure'
+
+  - script: |
       npx allure generate allure-results --clean -o $(REPORT_FOLDER)
     displayName: 'Generate Allure Report'
     condition: always()
