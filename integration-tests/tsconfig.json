@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@pages/*": ["../apps/app1/pageFactory/pageRepository/*"],
+      "@app2pages/*": ["../apps/app2/pageFactory/pageRepository/*"],
+      "@lib/*": ["../lib/*"]
+    }
+  }
+}
