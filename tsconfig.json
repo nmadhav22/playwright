@@ -5,7 +5,8 @@
       "@pages/*": ["apps/app1/pageFactory/pageRepository/*"],
       "@objects/*": ["apps/app1/pageFactory/objectRepository/*"],
       "@app2pages/*": ["apps/app2/pageFactory/pageRepository/*"],
-      "@app1Base": ["apps/app1/BaseTest"],      "@app2Base": ["apps/app2/BaseTest"],
+      "@app1Base": ["apps/app1/BaseTest"],
+      "@app2Base": ["apps/app2/BaseTest"],
       "@lib/*": ["lib/*"],
       "@shared/*": ["shared/*"]
     }
