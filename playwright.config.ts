@@ -17,8 +17,8 @@ const config: PlaywrightTestConfig = {
   reporter: [[`allure-playwright`], ['junit', { outputFile: 'results.xml' }]],
     projects: [
       {
-        name: `Chrome`,
-        testDir: './tests/functional/Burns',
+        name: `app1-chrome`,
+        testDir: './apps/app1/tests',
         use: {
           browserName: `chromium`,
           baseURL: testConfig[ENV],
@@ -35,10 +35,28 @@ const config: PlaywrightTestConfig = {
         },
       },
       {
-        name: `Firefox`,
-        testDir: './tests/functional/Burns',
+        name: `app1-firefox`,
+        testDir: './apps/app1/tests',
         use: {
           browserName: `firefox`,
+          baseURL: testConfig[ENV],
+          headless: true,
+          viewport: { width: 1680, height: 938 },
+          ignoreHTTPSErrors: true,
+          acceptDownloads: true,
+          screenshot: `only-on-failure`,
+          video: `retain-on-failure`,
+          trace: `retain-on-failure`,
+          launchOptions: {
+            slowMo: 0,
+          },
+        },
+      },
+      {
+        name: `app2-chrome`,
+        testDir: './apps/app2/tests',
+        use: {
+          browserName: `chromium`,
           baseURL: testConfig[ENV],
           headless: true,
           viewport: { width: 1680, height: 938 },
