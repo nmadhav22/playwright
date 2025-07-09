@@ -1,13 +1,13 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "esModuleInterop": true,                             /*This is for "path" module import*/
-    "baseUrl": ".",                                      /* Specify the base directory to resolve non-relative module names. */
     "paths": {
       "@pages/*": ["apps/app1/pageFactory/pageRepository/*"],
       "@objects/*": ["apps/app1/pageFactory/objectRepository/*"],
-      "@lib/*": ["lib/*"],
-      "@shared/*": ["shared/*"],
       "@app2pages/*": ["apps/app2/pageFactory/pageRepository/*"],
-      "@app1Base": ["apps/app1/BaseTest"],
-      "@app2Base": ["apps/app2/BaseTest"]
-    }  }}
+      "@app1Base": ["apps/app1/BaseTest"],      "@app2Base": ["apps/app2/BaseTest"],
+      "@lib/*": ["lib/*"],
+      "@shared/*": ["shared/*"]
+    }
+  }
+}

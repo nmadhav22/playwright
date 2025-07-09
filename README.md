@@ -195,10 +195,11 @@ npm run allureReport
 npx playwright show-trace trace.zip
 ```
 18. You can change the Logging Message at Test Case/Test Step Level in CustomReporterConfig.ts file
-19. In `tsconfig.json` file in `paths` section we can re-assign the long path imports like '../../' to a variable which starts with '@' and then we can use it to shorten our import statements in respective file.
-In the below example wherever '../../apps/app1/pageFactory/pageRepository/' import statement is used we can replace it with '@pages'
+19. Module path aliases are defined in `tsconfig.base.json`. This base file specifies the shared mappings such as `@lib` and `@shared`.
+   Each application's `tsconfig.json` extends this file and adds its own paths. For example, `apps/app1/tsconfig.json` maps
+   `@pages` to its page repository:
 ```JS
-"@pages/*":["apps/app1/pageFactory/pageRepository/*"]
+"@pages/*": ["apps/app1/pageFactory/pageRepository/*"]
 ```
 20. Network Replay : 
 For using this featre in Playwright we use HAR file. 
