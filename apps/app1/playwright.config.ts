@@ -1,4 +1,5 @@
-import baseConfig, { ENV, testConfig } from '../../playwright.config';
+import baseConfig, { ENV } from '../../playwright.config';
+import { testConfig } from './testConfig';
 import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
