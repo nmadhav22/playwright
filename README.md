@@ -250,6 +250,9 @@ npm run test:ui --ENV="qa"
 27. For Configuring Ortoni HTML Report, navigate to "playwright.config.ts" and provide desired changes "reportConfig" variable, then pass this variable in reporter section as ,['ortoni-report', reportConfig]. For more details on this please refer below video
 <a>https://www.youtube.com/watch?v=HMaiL6cARZk</a>
 
+28. Integration tests using page objects from both applications live in
+    `integration-tests/`. Run them with `npm run test:integration`.
+
 ## Reports
 
 - <b>Overall Report</b>
