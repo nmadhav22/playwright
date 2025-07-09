@@ -23,6 +23,17 @@ const config: PlaywrightTestConfig = {
         baseURL: testConfig[ENV],
       },
     },
+    {
+      name: 'api',
+      testDir: './tests/api',
+      use: {
+        baseURL: 'https://reqres.in',
+      },
+    },
+    {
+      name: 'db',
+      testDir: './tests/db',
+    },
     ...(baseConfig.projects || []),
   ],
 };

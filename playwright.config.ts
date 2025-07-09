@@ -10,7 +10,6 @@ if (!ENV || !['qa', 'dev', 'qaApi', 'devApi'].includes(ENV)) {
 }
 
 const baseConfig: PlaywrightTestConfig = {
-  globalSetup: './global-setup',
   timeout: 120000,
   retries: 0,
   reporter: [['allure-playwright'], ['junit', { outputFile: 'results.xml' }]],
@@ -25,20 +24,7 @@ const baseConfig: PlaywrightTestConfig = {
     launchOptions: {
       slowMo: 0,
     },
-  },
-  projects: [
-    {
-      name: 'api',
-      testDir: './tests/api',
-      use: {
-        baseURL: 'https://reqres.in',
-      },
-    },
-    {
-      name: 'db',
-      testDir: './tests/db',
-    },
-  ],
+  }
 };
 export default baseConfig;
 export { testConfig };
