@@ -4,6 +4,10 @@ import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
   ...baseConfig,
+  reporter: [
+    ['allure-playwright'],
+    ['junit', { outputFile: 'apps/app1/results.xml' }]
+  ],
   projects: [
     {
       name: 'app1-chrome',
