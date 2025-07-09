@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
   ...baseConfig,
   reporter: [
     ['allure-playwright'],
-    ['junit', { outputFile: 'apps/app1/results.xml' }]
+    ['junit', { outputFile: 'results.xml' }]
   ],
   projects: [
     {
