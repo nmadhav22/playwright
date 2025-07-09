@@ -26,6 +26,7 @@ jobs:
         displayName: 'Install project dependencies'
 
       - script: |
+          cd apps/app1
           npx playwright test
         displayName: 'Run Playwright tests'
         env:
@@ -42,13 +43,13 @@ jobs:
           curl -X POST \
             -H "Authorization: Bearer $(ZEPHYR_TOKEN)" \
             -H "Content-Type: multipart/form-data" \
-            -F "file=@results.xml" \
+            -F "file=@apps/app1/results.xml" \
             "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
         displayName: 'Upload to Zephyr'
         condition: always()
 
       - script: |
-          npx allure generate allure-results --clean -o $(REPORT_FOLDER)
+          npx allure generate apps/app1/allure-results --clean -o $(REPORT_FOLDER)
         displayName: 'Generate Allure Report'
         condition: always()
 

@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@lib/*": ["lib/*"],
+      "@shared/*": ["shared/*"],
+      "@app2pages/*": ["apps/app2/pageFactory/pageRepository/*"],
+      "@app2Base": ["apps/app2/BaseTest"]
+    }
+  }
+}
