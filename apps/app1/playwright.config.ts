@@ -7,7 +7,7 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'app1-chrome',
-      testDir: './tests',
+      testDir: './tests/functional',
       use: {
         ...baseConfig.use,
         browserName: 'chromium',
@@ -16,7 +16,7 @@ const config: PlaywrightTestConfig = {
     },
     {
       name: 'app1-firefox',
-      testDir: './tests',
+      testDir: './tests/functional',
       use: {
         ...baseConfig.use,
         browserName: 'firefox',

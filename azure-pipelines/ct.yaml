@@ -26,6 +26,7 @@ jobs:
         displayName: 'Install project dependencies'
 
       - script: |
+          cd apps/app1
           npx playwright test
         displayName: 'Run Playwright tests'
         env:
