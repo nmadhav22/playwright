@@ -1,4 +1,4 @@
-import test from '@playwright/test';
+import test from '@app2Base';
 import { SamplePage } from '@app2pages/SamplePage';
 
 // Sample placeholder test for app2

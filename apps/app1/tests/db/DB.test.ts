@@ -1,5 +1,6 @@
 import { DBActions } from '@lib/DBActions';
-import { test, expect } from '@playwright/test'
+import test from '@app1Base'
+import { expect } from '@playwright/test'
 
 test('SQLite DB demo', async () => {
     const db = new DBActions();
@@ -12,5 +13,4 @@ test('SQLite DB demo', async () => {
     expect(row.id).toBe(1);
     expect(row.name).toBe('Playwright');
 
-    await db.close();
-});
+    await db.close();});

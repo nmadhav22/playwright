@@ -7,6 +7,7 @@
       "@objects/*": ["apps/app1/pageFactory/objectRepository/*"],
       "@lib/*": ["lib/*"],
       "@shared/*": ["shared/*"],
-      "@app2pages/*": ["apps/app2/pageFactory/pageRepository/*"]
-    }
-  }}
+      "@app2pages/*": ["apps/app2/pageFactory/pageRepository/*"],
+      "@app1Base": ["apps/app1/BaseTest"],
+      "@app2Base": ["apps/app2/BaseTest"]
+    }  }}

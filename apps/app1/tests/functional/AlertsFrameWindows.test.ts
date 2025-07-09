@@ -1,4 +1,4 @@
-import test from '@lib/BaseTest';
+import test from '@app1Base';
 
 test(`Verify Alerts, Frame & Windows Page`, { tag: '@Smoke'}, async ({ loginPage, alertsFrameWindowsPage, webActions }) => {
     await loginPage.navigateToURL();
@@ -11,5 +11,4 @@ test(`Verify Alerts, Frame & Windows Page`, { tag: '@Smoke'}, async ({ loginPage
     await webActions.clickByText('Frames');
     await alertsFrameWindowsPage.verifyFrameText('This is a sample page');
     await webActions.clickByText('Nested Frames');
-    await alertsFrameWindowsPage.verifyNestedFrameChildText();
-});
+    await alertsFrameWindowsPage.verifyNestedFrameChildText();});

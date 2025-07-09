@@ -1,5 +1,5 @@
 import { APIActions } from '@lib/APIActions';
-import { test } from '@playwright/test';
+import test from '@app1Base';
 
 const apiActions = new APIActions();
 

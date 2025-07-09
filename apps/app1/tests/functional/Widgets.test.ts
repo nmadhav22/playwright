@@ -1,4 +1,4 @@
-import test from '@lib/BaseTest';
+import test from '@app1Base';
 
 test(`Verify Widgets Page`, { tag: '@Smoke'}, async ({ loginPage, widgetsPage, webActions }) => {
     await loginPage.navigateToURL();
@@ -9,5 +9,4 @@ test(`Verify Widgets Page`, { tag: '@Smoke'}, async ({ loginPage, widgetsPage, w
     await webActions.clickByText('Tool Tips');
     await widgetsPage.verifyButtonTooltip('You hovered over the Button');
     await webActions.clickByText('Select Menu');
-    await widgetsPage.oldStyleSelectColour('Aqua');
-});
+    await widgetsPage.oldStyleSelectColour('Aqua');});
