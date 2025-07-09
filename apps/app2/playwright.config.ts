@@ -1,2 +1,20 @@
-import baseConfig from '../../playwright.config';
-export default { ...baseConfig };
+import baseConfig, { ENV, testConfig } from '../../playwright.config';
+import { PlaywrightTestConfig } from '@playwright/test';
+
+const config: PlaywrightTestConfig = {
+  ...baseConfig,
+  projects: [
+    {
+      name: 'app2-chrome',
+      testDir: './tests',
+      use: {
+        ...baseConfig.use,
+        browserName: 'chromium',
+        baseURL: testConfig[ENV],
+      },
+    },
+    ...(baseConfig.projects || []),
+  ],
+};
+
+export default config;
