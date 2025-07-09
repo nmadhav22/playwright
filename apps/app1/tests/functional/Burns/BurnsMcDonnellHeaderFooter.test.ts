@@ -1,4 +1,4 @@
-import test from '@lib/BaseTest';
+import test from '@app1Base';
 
 test('Burns and McDonnell Validate Header Footer', async ({ homePage }) => {
   await homePage.navigateToURL();

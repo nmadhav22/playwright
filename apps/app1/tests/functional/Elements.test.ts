@@ -1,4 +1,4 @@
-import test from '@lib/BaseTest';
+import test from '@app1Base';
 
 test(`Verify Elements Page`, { tag: '@Smoke'}, async ({ loginPage, elementsPage, webActions }) => {
     await loginPage.navigateToURL();
