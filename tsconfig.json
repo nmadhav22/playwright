@@ -9,4 +9,5 @@
       "@shared/*": ["shared/*"],
       "@app2pages/*": ["apps/app2/pageFactory/pageRepository/*"]
     }
-  }}
+  }
+}
