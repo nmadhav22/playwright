@@ -25,8 +25,8 @@ jobs:
           npm ci
         displayName: 'Install project dependencies'
 
-      - script: |          
-          npx playwright test
+      - script: |
+          npm run test:app1
         displayName: 'Run Playwright tests'
         env:
           npm_config_ENV: qa
