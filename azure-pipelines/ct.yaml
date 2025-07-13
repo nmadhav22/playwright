@@ -48,7 +48,7 @@ jobs:
         condition: always()
 
       - script: |
-          npx allure generate apps/app1/allure-results --clean -o $(REPORT_FOLDER)
+          npx allure generate allure-results --clean -o $(REPORT_FOLDER)
         displayName: 'Generate Allure Report'
         condition: always()
 
