@@ -66,6 +66,7 @@ jobs:
   - job: UploadAndNotify
     displayName: 'Upload Report & Notify'
     dependsOn: PlaywrightTests
+    condition: always()
     pool:
       vmImage: 'ubuntu-latest'
     steps:
