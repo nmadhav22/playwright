@@ -13,4 +13,5 @@ test('SCRUM-T5 SQLite DB demo', async () => {
     expect(row.id).toBe(1);
     expect(row.name).toBe('Playwright');
 
-    await db.close();});
+    await db.close();
+});
