@@ -21,7 +21,8 @@
     "lighthouse": "node tests/lighthouse/Lighthouse.js",
     "test:accessibility": "npx playwright test Axe.test.ts --project=Chrome",
     "test:app1": "npx playwright test -c apps/app1/playwright.config.ts",
-    "test:app2": "npx playwright test -c apps/app2/playwright.config.ts"
+    "test:app2": "npx playwright test -c apps/app2/playwright.config.ts",
+    "test:integration": "npx playwright test -c integration-tests/playwright.config.ts"
   },
   "repository": {
     "type": "git",

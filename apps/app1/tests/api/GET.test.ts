@@ -13,6 +13,6 @@ test(`getUsers`, { tag: '@API'}, async ({ request }) => {
     await apiActions.verifyStatusCode(response);
 
     //* Body Response Params and Body Response Headers are stored in single text file separated by #
-    const responseBodyParams = (await apiActions.readValuesFromTextFile(`getUsers`)).split(`#`)[0];
+    const responseBodyParams = (await apiActions.readValuesFromTextFile('./apps/app1/utils/api/getUsers.txt')).split(`#`)[0];
     await apiActions.verifyResponseBody(responseBodyParams, await response.json(), `Response Body`);
 });
