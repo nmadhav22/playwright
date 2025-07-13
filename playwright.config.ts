@@ -14,7 +14,7 @@ const baseConfig: PlaywrightTestConfig = {
   retries: 0,
   reporter: [['allure-playwright'], ['junit', { outputFile: 'results.xml' }]],
   use: {
-    headless: true,
+    headless: false,
     viewport: { width: 1680, height: 938 },
     ignoreHTTPSErrors: true,
     acceptDownloads: true,
