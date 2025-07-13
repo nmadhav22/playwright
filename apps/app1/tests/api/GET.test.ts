@@ -3,7 +3,7 @@ import test from '@app1Base';
 
 const apiActions = new APIActions();
 
-test(`getUsers`, { tag: '@API'}, async ({ request }) => {
+test('SCRUM-T3 getUsers', { tag: '@API'}, async ({ request }) => {
     const response = await request.get(`/api/users?per_page=1`, {
         headers: {
             'x-api-key': 'reqres-free-v1'
