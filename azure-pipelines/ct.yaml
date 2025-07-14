@@ -26,7 +26,7 @@ jobs:
         displayName: 'Install project dependencies'
 
       - script: |
-          npx playwright test
+          npm run test:app1
         displayName: 'Run Playwright tests'
         env:
           npm_config_ENV: qa
@@ -42,7 +42,7 @@ jobs:
           curl -X POST \
             -H "Authorization: Bearer $(ZEPHYR_TOKEN)" \
             -H "Content-Type: multipart/form-data" \
-            -F "file=@results.xml" \
+            -F "file=@apps/app1/results.xml" \
             "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
         displayName: 'Upload to Zephyr'
         condition: always()
@@ -66,6 +66,7 @@ jobs:
   - job: UploadAndNotify
     displayName: 'Upload Report & Notify'
     dependsOn: PlaywrightTests
+    condition: always()
     pool:
       vmImage: 'ubuntu-latest'
     steps:

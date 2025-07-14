@@ -187,18 +187,19 @@ npm run allureReport
 11. For HTML Report generation execute below command , single static HTML report(index.html) which can be sent via email is generated in "html-report" folder:
 12. For debugging test cases add debug points, the press CNTRL+SHIFT+P and type "debug:debug npm script", on the edit box select desired script.
 13. Screenshots, Videos and Trace files will be generated in test-results folder.
-14. To change your username go to `testConfig.ts` and provide value against `username`
-15. To change password, go to `lib/WebActions` in `decipherPassword()` uncomment `ENCRYPT` code block and replace `password` with your password, execute the test case, Encrypted password will be printed on your console . Copy Encrypted password in `testConfig.ts` against `password` field. You can comment Encrypt bloack ater this.
-16. For executing Postgres DB test case, navigate to `testConfig.ts` and provide values for `dbUsername, dbPassword, dbServerName, dbPort, dbName`. Refer to `tests/DB.test.ts` for connecting to DB and Firing a Query.
+14. Each application under `apps/` contains its own `testConfig.ts` file. Update the username inside the relevant application's `testConfig.ts`.
+15. To change password, go to `lib/WebActions` in `decipherPassword()` uncomment `ENCRYPT` code block and replace `password` with your password, execute the test case, Encrypted password will be printed on your console. Copy the encrypted password into the appropriate `testConfig.ts` for that application. You can comment the `ENCRYPT` block after this.
+16. For executing Postgres DB test case, navigate to the application's `testConfig.ts` and provide values for `dbUsername, dbPassword, dbServerName, dbPort, dbName`. Refer to `tests/DB.test.ts` for connecting to DB and Firing a Query.
 17. For viewing trace files, go to folder where `trace.zip` is generated and execute :
 ```JS
 npx playwright show-trace trace.zip
 ```
 18. You can change the Logging Message at Test Case/Test Step Level in CustomReporterConfig.ts file
-19. In `tsconfig.json` file in `paths` section we can re-assign the long path imports like '../../' to a variable which starts with '@' and then we can use it to shorten our import statements in respective file.
-In the below example wherever '../../pageFactory/pageRepository/' import statement is used we can replace it with '@pages'
+19. Module path aliases are defined in `tsconfig.base.json`. This base file specifies the shared mappings such as `@lib` and `@shared`.
+   Each application's `tsconfig.json` extends this file and adds its own paths. For example, `apps/app1/tsconfig.json` maps
+   `@pages` to its page repository:
 ```JS
-"@pages/*":["pageFactory/pageRepository/*"]
+"@pages/*": ["apps/app1/pageFactory/pageRepository/*"]
 ```
 20. Network Replay : 
 For using this featre in Playwright we use HAR file. 

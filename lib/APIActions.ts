@@ -35,7 +35,7 @@ export class APIActions {
     expect(status, `${fieldNames} was not present in ${responseType}`).toBe(true);
   }
 
-  async readValuesFromTextFile(fileName: string): Promise<string> {
-    return fs.readFileSync(`./utils/api/${fileName}.txt`, `utf8`);
+  async readValuesFromTextFile(filePath: string): Promise<string> {
+    return fs.readFileSync(filePath, `utf8`);
   }
 }
