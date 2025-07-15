@@ -26,6 +26,9 @@ har/
 # Ignore Allure and JUnit output folders in each app
 apps/**/allure-results/
 apps/**/test-results/
+apps/**/playwright-report/
+apps/**/visualComparison/
 
 # Ignore any Playwright single results.xml in each app
 apps/**/results.xml
+results.xml
