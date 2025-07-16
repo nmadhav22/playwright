@@ -12,6 +12,8 @@ variables:
     value: 'allure-reports'
   - name: REPORT_FOLDER
     value: 'allure-report-$(Build.BuildId)'
+  - name: CI
+    value: 'true'
 
 jobs:
   # -------------------------------
