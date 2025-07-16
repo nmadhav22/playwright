@@ -2,11 +2,13 @@ import baseConfig, { ENV } from '../../playwright.config';
 import { testConfig } from './testConfig';
 import { PlaywrightTestConfig } from '@playwright/test';
 
+const isCI = !!process.env.CI;
+
 const config: PlaywrightTestConfig = {
   ...baseConfig,
   reporter: [
     ['allure-playwright'],
-    ['junit', { outputFile: 'results.xml' }]
+    ['junit', { outputFile: 'results.xml' }],
   ],
   projects: [
     {
@@ -14,6 +16,7 @@ const config: PlaywrightTestConfig = {
       testDir: './tests/functional',
       use: {
         ...baseConfig.use,
+        headless: isCI,
         browserName: 'chromium',
         baseURL: testConfig[ENV],
       },

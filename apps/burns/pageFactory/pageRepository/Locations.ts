@@ -14,7 +14,7 @@ export class LocationsPage {
         this.context = context;
         webActions = new WebActions(this.page, this.context);
         this.DALLAS = page.getByRole('link', { name: 'Dallas-Fort Worth, Texas' });
-        this.DALLAS_ADDRESS = page.getByText('Gallerias North Tower I 13737');
+        this.DALLAS_ADDRESS = page.getByText('Galleria North Tower I 13737');
     }
 
     async verifyDallasAndClick(): Promise<void> {
