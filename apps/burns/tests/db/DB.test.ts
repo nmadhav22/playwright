@@ -2,7 +2,7 @@ import { DBActions } from '@lib/DBActions';
 import test from '@burnsBase'
 import { expect } from '@playwright/test'
 
-test('SCRUM-T5 SQLite DB demo', async () => {
+test('BMW-T5 SQLite DB demo', async () => {
     const db = new DBActions();
 
     await db.createTable();

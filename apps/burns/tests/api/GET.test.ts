@@ -3,7 +3,7 @@ import test from '@burnsBase';
 
 const apiActions = new APIActions();
 
-test('SCRUM-T3 getUsers', { tag: '@API'}, async ({ request }) => {
+test('BMW-T3 getUsers', { tag: '@API'}, async ({ request }) => {
     const response = await request.get(`/api/users?per_page=1`, {
         headers: {
             'x-api-key': 'reqres-free-v1'

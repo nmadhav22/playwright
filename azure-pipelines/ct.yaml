@@ -43,7 +43,7 @@ jobs:
             -H "Authorization: Bearer $(ZEPHYR_TOKEN)" \
             -H "Content-Type: multipart/form-data" \
             -F "file=@apps/burns/results.xml" \
-            "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=SCRUM"
+            "https://api.zephyrscale.smartbear.com/v2/automations/executions/junit?projectKey=BMW"
         displayName: 'Upload to Zephyr'
         condition: always()
 
