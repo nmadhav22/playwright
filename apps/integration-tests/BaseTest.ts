@@ -1,6 +1,6 @@
 import base from '@lib/BaseTest';
 import { HomePage } from '@pages/HomePage';
-import { SamplePage } from '@app2pages/SamplePage';
+import { SamplePage } from '@unanetpages/SamplePage';
 
 const test = base.extend<{
   homePage: HomePage;

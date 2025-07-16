@@ -1,4 +1,4 @@
-import test from '@app1Base';
+import test from '@burnsBase';
 
 test('SCRUM-T1 Burns and McDonnell Validate Header Footer', async ({ homePage, locationPage }) => {
   await homePage.navigateToURL();

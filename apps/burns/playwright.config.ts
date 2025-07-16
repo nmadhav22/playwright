@@ -10,7 +10,7 @@ const config: PlaywrightTestConfig = {
   ],
   projects: [
     {
-      name: 'app1-chrome',
+      name: 'burns-chrome',
       testDir: './tests/functional',
       use: {
         ...baseConfig.use,
@@ -19,7 +19,7 @@ const config: PlaywrightTestConfig = {
       },
     },
     {
-      name: 'app1-firefox',
+      name: 'burns-firefox',
       testDir: './tests/functional',
       use: {
         ...baseConfig.use,

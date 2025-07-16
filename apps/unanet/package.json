@@ -1,0 +1,7 @@
+{
+  "name": "unanet",
+  "private": true,
+  "scripts": {
+    "test": "npx playwright test -c playwright.config.ts --project=unanet-chrome"
+  }
+}

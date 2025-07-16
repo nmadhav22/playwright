@@ -2,11 +2,11 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "paths": {
-      "@pages/*": ["apps/app1/pageFactory/pageRepository/*"],
-      "@objects/*": ["apps/app1/pageFactory/objectRepository/*"],
-      "@app2pages/*": ["apps/app2/pageFactory/pageRepository/*"],
-      "@app1Base": ["apps/app1/BaseTest"],
-      "@app2Base": ["apps/app2/BaseTest"],
+      "@pages/*": ["apps/burns/pageFactory/pageRepository/*"],
+      "@objects/*": ["apps/burns/pageFactory/objectRepository/*"],
+      "@unanetpages/*": ["apps/unanet/pageFactory/pageRepository/*"],
+      "@burnsBase": ["apps/burns/BaseTest"],
+      "@unanetBase": ["apps/unanet/BaseTest"],
       "@lib/*": ["lib/*"],
       "@shared/*": ["shared/*"]
     }

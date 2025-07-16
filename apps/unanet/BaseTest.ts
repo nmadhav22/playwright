@@ -1,5 +1,5 @@
 import base from '@lib/BaseTest';
-import { SamplePage } from '@app2pages/SamplePage';
+import { SamplePage } from '@unanetpages/SamplePage';
 
 const test = base.extend<{
   samplePage: SamplePage;

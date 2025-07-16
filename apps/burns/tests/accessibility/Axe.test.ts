@@ -1,4 +1,4 @@
-import test from '@app1Base';
+import test from '@burnsBase';
 import { expect } from "@playwright/test";
 
 test(`Verify Page Accessibility`, async ({ page, makeAxeBuilder }) => {

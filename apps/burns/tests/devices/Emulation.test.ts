@@ -1,4 +1,4 @@
-import test from '@app1Base';
+import test from '@burnsBase';
 
 test(`Verify Elements Page.`, async ({ webActions }) => {
     // await loginPage.navigateToURL();

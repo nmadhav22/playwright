@@ -1,7 +1,0 @@
-{
-  "name": "app2",
-  "private": true,
-  "scripts": {
-    "test": "npx playwright test -c playwright.config.ts --project=app2-chrome"
-  }
-}

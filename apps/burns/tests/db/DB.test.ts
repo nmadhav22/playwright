@@ -1,5 +1,5 @@
 import { DBActions } from '@lib/DBActions';
-import test from '@app1Base'
+import test from '@burnsBase'
 import { expect } from '@playwright/test'
 
 test('SCRUM-T5 SQLite DB demo', async () => {

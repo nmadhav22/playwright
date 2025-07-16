@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
   ...baseConfig,
   projects: [
     {
-      name: 'app2-chrome',
+      name: 'unanet-chrome',
       testDir: './tests',
       use: {
         ...baseConfig.use,

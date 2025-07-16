@@ -5,7 +5,8 @@
       "@lib/*": ["lib/*"],
       "@shared/*": ["shared/*"],
       "@pages/*": ["apps/burns/pageFactory/pageRepository/*"],
-      "@unanetpages/*": ["apps/unanet/pageFactory/pageRepository/*"]
+      "@objects/*": ["apps/burns/pageFactory/objectRepository/*"],
+      "@burnsBase": ["apps/burns/BaseTest"]
     }
   }
 }
